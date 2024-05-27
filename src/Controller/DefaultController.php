@@ -2,23 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\Purchase;
+use App\Event\PurchaseConfirmedEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class DefaultController extends AbstractController
 {
     #[Route('/', methods: 'GET')]
     public function homepage(
-        Request $request,
-        TranslatorInterface $translator,
+        EventDispatcherInterface $eventDispatcher,
     ): Response {
-        dump($request->getLocale());
-        $request->setLocale('de');
-        dump($request->getLocale());
-        dump($translator->getLocale());
+        $purchase = new Purchase();
+        $purchase->setPriority(true);
+        $eventDispatcher->dispatch(new PurchaseConfirmedEvent($purchase));
 
         return $this->render('default/homepage.html.twig');
     }
