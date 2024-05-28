@@ -13,3 +13,5 @@ t_shirt:
 
 cloth_size:
   select: Sélectionnez une taille
+
+money_type.help: Saisissez le montant en centimes

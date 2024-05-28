@@ -1,5 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{# Form theme for one specific form
+    {% form_theme form 'form_div_layout.html.twig' %}
+#}
+
+{# Form theme in the same template file (_self)
+    {% form_theme form _self %}
+    {% block form_row %}
+    ...
+    {% endblocl %}
+#}
+
 {% block body %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
