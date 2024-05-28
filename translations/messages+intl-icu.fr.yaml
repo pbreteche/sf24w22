@@ -1,0 +1,15 @@
+t_shirt:
+  referenceNumber:
+    label: Numéro de référence
+  name:
+    label: Nom
+  price:
+    label: Prix
+    format: 'Prix : {value, number}'
+  description:
+    label: Description
+  size:
+    label: Taille
+
+cloth_size:
+  select: Sélectionnez une taille
