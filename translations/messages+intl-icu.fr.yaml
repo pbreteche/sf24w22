@@ -1,3 +1,7 @@
+brand:
+  name: { label: Marque }
+  logo: { label: Logo }
+
 t_shirt:
   referenceNumber:
     label: Numéro de référence

@@ -2,10 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Enum\ClothSize;
 use App\Entity\TShirt;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,8 +19,11 @@ class TShirtType extends AbstractType
                 'divisor' => 100,
             ])
             ->add('description')
-            ->add('size', ClothSize::class, [
+            ->add('size', ClothSizeType::class, [
                 'placeholder' => 'cloth_size.select',
+            ])
+            ->add('brand', BrandType::class, [
+                'label' => false,
             ])
         ;
     }

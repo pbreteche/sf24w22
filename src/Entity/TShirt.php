@@ -33,6 +33,9 @@ class TShirt
     #[ORM\Column(enumType: ClothSize::class)]
     private ?ClothSize $size = null;
 
+    #[ORM\ManyToOne]
+    private ?Brand $brand = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -104,6 +107,18 @@ class TShirt
     public function setSize(ClothSize $size): static
     {
         $this->size = $size;
+
+        return $this;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?Brand $brand): static
+    {
+        $this->brand = $brand;
 
         return $this;
     }

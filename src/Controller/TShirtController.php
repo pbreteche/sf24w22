@@ -24,6 +24,7 @@ class TShirtController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($tShirt);
+            $manager->persist($tShirt->getBrand());
             $manager->flush();
 
             return $this->redirectToRoute('app_tshirt_new');
