@@ -34,4 +34,23 @@ class TShirtController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/edit/{id}', methods: ['GET', 'POST'])]
+    public function edit(
+        Request $request,
+        TShirt $tShirt,
+        EntityManagerInterface $manager,
+    ): Response {
+        $form = $this->createForm(TShirtType::class, $tShirt);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->flush();
+
+            return $this->redirectToRoute('app_tshirt_new');
+        }
+
+        return $this->render('t_shirt/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }

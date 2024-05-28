@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\TShirt;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Event\PreSetDataEvent;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TShirtType extends AbstractType
@@ -24,7 +26,10 @@ class TShirtType extends AbstractType
             ])
             ->add('brand', BrandType::class, [
                 'label' => false,
+                'required' => false,
             ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, $this->disableRefNum(...))
+            //->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'disableRefNum'])
         ;
     }
 
@@ -34,5 +39,16 @@ class TShirtType extends AbstractType
             'data_class' => TShirt::class,
             'label_format' => 't_shirt.%name%.label',
         ]);
+    }
+
+    private function disableRefNum(PreSetDataEvent $event): void
+    {
+        /** @var TShirt $data */
+        $data = $event->getData();
+        $form = $event->getForm();
+
+        if ($data->getReferenceNumber()) {
+            $form->add('referenceNumber', options: ['disabled' => true]);
+        }
     }
 }
