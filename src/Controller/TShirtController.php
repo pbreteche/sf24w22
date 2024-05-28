@@ -30,7 +30,7 @@ class TShirtController extends AbstractController
         }
 
         return $this->render('t_shirt/new.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 }

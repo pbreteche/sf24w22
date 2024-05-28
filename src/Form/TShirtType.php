@@ -21,9 +21,8 @@ class TShirtType extends AbstractType
                 'divisor' => 100,
             ])
             ->add('description')
-            ->add('size', EnumType::class, [
+            ->add('size', ClothSize::class, [
                 'placeholder' => 'cloth_size.select',
-                'class' => ClothSize::class,
             ])
         ;
     }
