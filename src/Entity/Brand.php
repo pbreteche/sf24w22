@@ -21,7 +21,7 @@ class Brand
 
     #[Vich\UploadableField('files', fileNameProperty: 'logoName')]
     private ?File $logo = null;
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $logoName = null;
 
     public function getId(): ?int

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\TShirt;
+use App\Form\EventListener\UCFirstSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PreSetDataEvent;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -30,6 +31,9 @@ class TShirtType extends AbstractType
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, $this->disableRefNum(...))
             //->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'disableRefNum'])
+        ;
+        $builder->get('name')
+            ->addEventSubscriber(new UCFirstSubscriber())
         ;
     }
 

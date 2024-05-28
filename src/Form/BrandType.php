@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Brand;
+use App\Form\EventListener\UCFirstSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,6 +11,8 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class BrandType extends AbstractType
 {
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

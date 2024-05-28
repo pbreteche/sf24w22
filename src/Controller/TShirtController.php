@@ -19,12 +19,18 @@ class TShirtController extends AbstractController
         EntityManagerInterface $manager,
     ): Response {
         $tShirt = new TShirt();
+        // Create form and set data inside
+        // dispatch PRE_SET_DATA and POST_SET_DATA
         $form = $this->createForm(TShirtType::class, $tShirt);
+        // Map request data to form model
+        // dispatch PRE_SUBMIT, SUBMIT and POST_SUBMIT
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($tShirt);
-            $manager->persist($tShirt->getBrand());
+            if ($tShirt->getBrand()) {
+                $manager->persist($tShirt->getBrand());
+            }
             $manager->flush();
 
             return $this->redirectToRoute('app_tshirt_new');
