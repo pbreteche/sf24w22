@@ -53,6 +53,13 @@ class Brand
         return $this;
     }
 
+    public function setLogoName(?string $logoName): static
+    {
+        $this->logoName = $logoName;
+
+        return $this;
+    }
+
     public function getLogoName(): ?string
     {
         return $this->logoName;
