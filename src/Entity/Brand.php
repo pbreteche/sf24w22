@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BrandRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Attribute\Ignore;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: BrandRepository::class)]
@@ -20,6 +21,7 @@ class Brand
     private ?string $name = null;
 
     #[Vich\UploadableField('files', fileNameProperty: 'logoName')]
+    #[Ignore]
     private ?File $logo = null;
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $logoName = null;

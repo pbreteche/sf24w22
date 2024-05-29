@@ -4,4 +4,4 @@ un nouveau T-Shirt a été créé.
 
 Nom : {{ t_shirt.name }}
 Référence : {{ t_shirt.referenceNumber }}
-Prix : {{ t_shirt.price | format_currency('EUR') }}
+Prix : {{ t_shirt.price | format_currency('EUR', {multiplier: 0.01}) }}

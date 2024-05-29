@@ -4,5 +4,5 @@
 <dl>
     <dt>Nom :</dt><dd>{{ t_shirt.name }}</dd>
     <dt>Référence :</dt><dd>{{ t_shirt.referenceNumber }}</dd>
-    <dt>Prix :</dt><dd>{{ t_shirt.price | format_currency('EUR') }}</dd>
+    <dt>Prix :</dt><dd>{{ t_shirt.price | format_currency('EUR', {multiplier: 0.01}) }}</dd>
 </dl>
