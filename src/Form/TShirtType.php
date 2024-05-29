@@ -24,13 +24,8 @@ class TShirtType extends AbstractType
                 'divisor' => 100,
             ])
             ->add('description')
-            ->add('size', ClothSizeType::class, [
-                'placeholder' => 'cloth_size.select',
-            ])
-            ->add('brand', BrandType::class, [
-                'label' => false,
-                'required' => false,
-            ])
+            ->add('size')
+            ->add('brand')
             ->addEventListener(FormEvents::PRE_SET_DATA, $this->disableRefNum(...))
             //->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'disableRefNum'])
             ->add('tags', TextareaType::class)

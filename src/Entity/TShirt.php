@@ -6,6 +6,7 @@ use App\Entity\Enum\ClothSize;
 use App\Repository\TShirtRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity(repositoryClass: TShirtRepository::class)]
 class TShirt
