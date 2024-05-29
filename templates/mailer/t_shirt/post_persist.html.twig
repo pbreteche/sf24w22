@@ -1,0 +1,8 @@
+<p>Bonjour,</p>
+
+<h1>un nouveau T-Shirt a été créé.</h1>
+<dl>
+    <dt>Nom :</dt><dd>{{ t_shirt.name }}</dd>
+    <dt>Référence :</dt><dd>{{ t_shirt.referenceNumber }}</dd>
+    <dt>Prix :</dt><dd>{{ t_shirt.price | format_currency('EUR') }}</dd>
+</dl>
