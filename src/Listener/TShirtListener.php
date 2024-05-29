@@ -8,8 +8,9 @@ use Doctrine\ORM\Event\PostPersistEventArgs;
 use Doctrine\ORM\Events;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Part\DataPart;
+use Symfony\Component\Mime\Part\File;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
 #[AsEntityListener(Events::postPersist, entity: TShirt::class)]
 readonly class TShirtListener
@@ -43,7 +44,11 @@ readonly class TShirtListener
 
         $logoFile = $TShirt->getBrand()?->getLogo();
         if ($logoFile) {
-            $message->attachFromPath($logoFile->getPathname());
+            $message
+                ->attachFromPath($logoFile->getPathname())
+                ->addPart((new DataPart(new File($logoFile->getPathname()), 'logo', $logoFile->getMimeType()))->asInline())
+            ;
+
         }
 
         $this->mailer->send($message);
