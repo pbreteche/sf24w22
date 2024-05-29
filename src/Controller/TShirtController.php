@@ -33,6 +33,8 @@ class TShirtController extends AbstractController
             }
             $manager->flush();
 
+
+
             return $this->redirectToRoute('app_tshirt_new');
         }
 

@@ -135,7 +135,7 @@ class TShirt
     public function addTag(string $tag): static
     {
         $this->tags[] = $tag;
-        $this->tags[] = array_unique($this->tags);
+        $this->tags = array_unique($this->tags);
 
         return $this;
     }
