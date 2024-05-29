@@ -36,6 +36,9 @@ class TShirt
     #[ORM\ManyToOne]
     private ?Brand $brand = null;
 
+    #[ORM\Column(type: 'simple_array', nullable: true)]
+    private array $tags = [];
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -119,6 +122,29 @@ class TShirt
     public function setBrand(?Brand $brand): static
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    public function addTag(string $tag): static
+    {
+        $this->tags[] = $tag;
+        $this->tags[] = array_unique($this->tags);
+
+        return $this;
+    }
+
+    public function removeTag(string $tag): static
+    {
+        $pos = array_search($tag, $this->tags);
+        if (false !== $pos) {
+            unset($this->tags[$pos]);
+        }
 
         return $this;
     }
