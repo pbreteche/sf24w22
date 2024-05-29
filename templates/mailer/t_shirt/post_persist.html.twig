@@ -1,4 +1,17 @@
-<p>Bonjour,</p>
+{% apply inline_css %}
+<style>
+    .text {
+        margin-top: .5em;
+    }
+    h1 {
+        color: darkblue;
+    }
+    dt {
+        text-decoration: underline solid darkblue;
+    }
+</style>
+
+<p class="text">Bonjour,</p>
 
 <h1>un nouveau T-Shirt a été créé.</h1>
 <dl>
@@ -7,3 +20,4 @@
     <dt>Prix :</dt><dd>{{ t_shirt.price | format_currency('EUR', {multiplier: 0.01}) }}</dd>
     <dt>Logo :</dt><dd><img src="cid:logo"></dd>
 </dl>
+{% endapply %}
