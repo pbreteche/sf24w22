@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Sales;
 use App\Form\SingleDaySalesType;
+use App\Service\SalesDeliver;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ class SalesController extends AbstractController
     public function newSingleDay(
         Request $request,
         EntityManagerInterface $manager,
+        SalesDeliver $deliver,
     ): Response {
         $sales = new Sales();
         $form = $this->createForm(SingleDaySalesType::class, $sales);
@@ -25,6 +27,7 @@ class SalesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($sales);
             $manager->flush();
+            $deliver->deliver($sales);
 
             return $this->redirectToRoute('app_sales_newsingleday');
         }
