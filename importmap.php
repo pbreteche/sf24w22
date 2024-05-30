@@ -35,4 +35,7 @@ return [
     '@popperjs/core' => [
         'version' => '2.11.8',
     ],
+    'signature_pad' => [
+        'version' => '5.0.1',
+    ],
 ];
