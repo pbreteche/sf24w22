@@ -25,4 +25,15 @@ class TShirtRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findNamesStartingWith(string $userInput): array
+    {
+        return $this->createQueryBuilder('tshirt')
+            ->select('DISTINCT(tshirt.name)')
+            ->andWhere('tshirt.name LIKE :pattern')
+            ->setParameter('pattern', $userInput.'%')
+            ->getQuery()
+            ->getSingleColumnResult()
+        ;
+    }
 }

@@ -5,16 +5,16 @@ namespace App\Command;
 use App\Repository\TShirtRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:tshirt-stats',
-    description: 'Display stats table for t-shirt data',
+    name: 'app:tshirt-detail',
+    description: 'Display t-shirt detail',
 )]
-class TshirtStatsCommand extends Command
+class TshirtDetailCommand extends Command
 {
     public function __construct(
         private readonly TShirtRepository $repository,
@@ -25,14 +25,15 @@ class TshirtStatsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $stats = $this->repository->getStatsBySize();
+        $q = new Question('Quel est le nom du t-shirt');
+        $q->setAutocompleterCallback($this->repository->findNamesStartingWith(...));
 
-        $io->title('Stats des t-shirt par taille');
+        $tShirtName = $io->askQuestion($q);
 
-        $table = new Table($output);
-        $table->setHeaders(['Taille', 'Quantité', 'Tarif moyen']);
-        array_map(fn ($stat) => $table->addRow([$stat['size']->value, $stat[1], $stat[2]]), $stats);
-        $table->render();
+        $tShirt = $this->repository->findOneBy(['name' => $tShirtName]);
+
+        $io->info($tShirt->getName());
+        $io->writeln($tShirt->getReferenceNumber());
 
         return Command::SUCCESS;
     }
