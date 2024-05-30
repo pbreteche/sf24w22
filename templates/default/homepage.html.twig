@@ -3,3 +3,9 @@
 {% block body %}
     <p>{{ app.locale }}</p>
 {% endblock %}
+
+{% block importmap %}
+    {# We cannot reuse previous import map, should be only one per page #}
+    {# /!\ Do not use {{ parent() }} /!\ #}
+{{ importmap(['app', 'additional_entry_point']) }}
+{% endblock %}
