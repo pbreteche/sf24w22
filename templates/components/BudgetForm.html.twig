@@ -1,0 +1,12 @@
+<div {{ attributes }}>
+    {{ form_start(form) }}
+    {{ form_row(form.amount) }}
+
+    {% for expense in form.expenses %}
+        {{ form_widget(expense) }}
+        {{ form_row(expense.vars.button_delete, {label: 'X', attr: {class: 'btn btn-outline-danger'}}) }}
+    {% endfor %}
+    {{ form_widget(form.expenses.vars.button_add, {label: '+ Add Item', attr: {class: 'btn btn-outline-primary'}}) }}
+    <button>Valider</button>
+    {{ form_end(form) }}
+</div>
