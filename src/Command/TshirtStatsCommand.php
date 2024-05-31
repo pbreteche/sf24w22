@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Repository\TShirtRepository;
+use App\Service\TShirtStatsService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -17,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class TshirtStatsCommand extends Command
 {
     public function __construct(
-        private readonly TShirtRepository $repository,
+        private readonly TShirtStatsService $statsService,
     ) {
         parent::__construct();
     }
@@ -25,7 +26,7 @@ class TshirtStatsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $stats = $this->repository->getStatsBySize();
+        $stats = $this->statsService->getStats();
 
         $io->title('Stats des t-shirt par taille');
 

@@ -105,6 +105,7 @@
         }
     },
     "require-dev": {
+        "liip/test-fixtures-bundle": "^3.0",
         "phpunit/phpunit": "^11",
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",
