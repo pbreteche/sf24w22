@@ -15,6 +15,7 @@ class Sales
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\GreaterThan(new \DateTimeImmutable('today'))]
     private ?\DateTimeImmutable $beginAt = null;
 
     #[ORM\Column]

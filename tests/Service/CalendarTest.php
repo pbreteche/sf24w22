@@ -3,12 +3,13 @@
 namespace App\Tests\Service;
 
 use App\Service\Calendar;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
 {
-    #[DataProvider('isWeekendProvider')]
+    /**
+     * @dataProvider isWeekendProvider
+     */
     public function testIsWeekend($input1, $expected)
     {
         $calendar = new Calendar();

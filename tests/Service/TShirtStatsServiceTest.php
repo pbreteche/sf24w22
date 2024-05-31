@@ -18,7 +18,7 @@ class TShirtStatsServiceTest extends KernelTestCase
         self::bootKernel();
         $container = static::getContainer();
         $this->service = $container->get(TShirtStatsService::class);
-        $this->databaseTool = static::getContainer()->get(DatabaseToolCollection::class);
+        $this->databaseTool = static::getContainer()->get(DatabaseToolCollection::class)->get();
     }
 
     public function testGetStats()
