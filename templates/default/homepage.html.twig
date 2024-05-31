@@ -3,11 +3,7 @@
 {% block body %}
     <p>{{ app.locale }}</p>
 
-    <div data-controller="signature">
-        <canvas data-signature-target="canvas"></canvas>
-        <button disabled data-signature-target="button">Envoyer</button>
-        <button data-action="click->signature#clear">Effacer</button>
-    </div>
+    <twig:Signature></twig:Signature>
 {% endblock %}
 
 {% block importmap %}
