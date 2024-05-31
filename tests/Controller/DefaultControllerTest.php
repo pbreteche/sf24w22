@@ -17,5 +17,11 @@ class DefaultControllerTest extends PantherTestCase
         $mouse->mouseMoveTo('canvas', 100, 60);
 
         $client->takeScreenshot('screen.png');
+
+        $crawler = $client->getCrawler();
+
+        $crawler->selectButton('Ajouter')->form([
+
+        ]);
     }
 }
