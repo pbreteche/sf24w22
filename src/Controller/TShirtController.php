@@ -52,8 +52,6 @@ class TShirtController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($tShirt);
-            dump($manager->getUnitOfWork()->getEntityState($tShirt));
             $manager->flush();
 
             return $this->redirectToRoute('app_tshirt_new');
