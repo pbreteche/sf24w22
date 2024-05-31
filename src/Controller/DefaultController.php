@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Purchase;
 use App\Event\PurchaseConfirmedEvent;
+use App\Service\LocaleRegionMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -27,6 +28,7 @@ class DefaultController extends AbstractController
     #[Route('/cache-demo/{number<\d+>}')]
     public function stats(
         TagAwareCacheInterface $myCachePool,
+        LocaleRegionMapper $localeRegionMapper,
         int $number,
     ): Response {
         $key = sprintf('app_default_stats_%02d', $number);
