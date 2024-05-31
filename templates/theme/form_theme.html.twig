@@ -4,3 +4,13 @@
     {{ parent() }}
     {% if required %}<span class="badge text-bg-warning">requis</span>{% endif %}
 {% endblock %}
+
+{% block filtered_entity_widget %}
+    <div data-controller="filter-entity" data-filter-entity-url-value="{{ endpoint_url }}">
+    <input type="text" data-action="change->filter-entity#update" data-filter-entity-target="input">
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) -%}
+    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}
+            data-filter-entity-target="select"
+    ></select>
+    </div>
+{% endblock %}

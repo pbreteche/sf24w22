@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\TShirt;
+use App\Form\FilteredEntityType;
 use App\Form\TShirtType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -59,6 +60,23 @@ class TShirtController extends AbstractController
 
         return $this->render('t_shirt/new.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/filter')]
+    public function filteredInput(
+
+    ): Response {
+        $form = $this->createFormBuilder(null)
+        ->add('test', FilteredEntityType::class, [
+            'class' => TShirt::class,
+            'choice_label' => fn (TShirt $choice) => $choice->getName(),
+            'endpoint_url' => '/api/t-shirt',
+        ])
+        ->getForm();
+
+        return $this->render('t_shirt/filtered_input.html.twig', [
+            'form' => $form,
         ]);
     }
 }
